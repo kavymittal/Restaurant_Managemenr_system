@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Restaurant Invoice</h2>
+<h3>Order ID: #{{ order.order_id }}</h3>
+<p><strong>Customer:</strong> {{ order.customer_name }} ({{ order.phone }})</p>
+<p><strong>Served By:</strong> {{ order.waiter_name or 'N/A' }}</p>
+<p><strong>Date:</strong> {{ order.order_time }}</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Line Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in details %}
+        <tr>
+            <td>{{ item.item_name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>₹{{ item.price }}</td>
+            <td>₹{{ item.line_total }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+<div style="text-align: right; width: 60%; margin-left: auto;">
+    <p><strong>Subtotal:</strong> ₹{{ order.subtotal }}</p>
+    <p><strong>GST (5%):</strong> +₹{{ order.gst }}</p>
+    <p><strong>Discount:</strong> -₹{{ order.discount }}</p>
+    <h2>Final Bill Amount: ₹{{ order.total_amount }}</h2>
+    <p><strong>Payment Mode:</strong> {{ payment.mode if payment else 'N/A' }}</p>
+</div>
+
+<button onclick="window.print()">Print Bill</button>
+{% endblock %}

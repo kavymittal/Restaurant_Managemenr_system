@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+<h3>Total Customers: {{ customers }}</h3>
+<h3>Total Menu Items: {{ items }}</h3>
+<h3>Total Orders: {{ orders }}</h3>
+<h3>Total Revenue: ₹{{ "%.2f"|format(revenue) }}</h3>
+{% endblock %}

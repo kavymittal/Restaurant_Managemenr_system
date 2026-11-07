@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Customer Management</h2>
+
+<form method="POST">
+    <input name="name" placeholder="Customer Name" required>
+    <input name="phone" placeholder="Phone Number" pattern="[0-9]{10}" title="10-digit phone number" required>
+    <input name="email" type="email" placeholder="Email">
+    <button type="submit">Add Customer</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in customers %}
+        <tr>
+            <td>{{ c.customer_id }}</td>
+            <td>{{ c.name }}</td>
+            <td>{{ c.phone }}</td>
+            <td>{{ c.email or '' }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4">No customers registered yet.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
